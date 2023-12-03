@@ -22,6 +22,9 @@ const photoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    _createdOn:{
+        type: Date,
+    },
     comments: [{
         type: ObjectId,
         ref: "Comment"

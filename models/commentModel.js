@@ -14,6 +14,9 @@ const commentSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "Photo"
     },
+    _createdOn:{
+        type:Date
+    }
 })
 
 module.exports = mongoose.model('Comment', commentSchema);
