@@ -1,6 +1,6 @@
 const { userModel, photoModel, commentModel } = require('../models');
 
-function newComment(text, userId, photoId,email, _createdOn) {
+/* function newComment(text, userId, photoId,email, _createdOn) {
     return commentModel.create({ text, userId, photoId,email, _createdOn})
         .then(comment => {
             return Promise.all([
@@ -9,7 +9,7 @@ function newComment(text, userId, photoId,email, _createdOn) {
             ])
         })
 }
-
+ */
 function getComments(req, res, next) {
 
     commentModel.find()
@@ -24,8 +24,11 @@ function createComment(req, res, next) {
     const { photoId } = req.params;
     const { email, text, userId } = req.body;
     const _createdOn = Date.now();
-    newComment(text, userId, photoId,email, _createdOn)
+    /* newComment(text, userId, photoId,email, _createdOn)
         .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
+        .catch(next); */
+        commentModel.create(text, userId, photoId,email, _createdOn)
+        .then((comment) => res.status(200).json(comment))
         .catch(next);
 }
 
