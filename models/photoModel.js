@@ -26,7 +26,7 @@ const photoSchema = new mongoose.Schema({
         type: Date,
     },
     _ownerId:{
-        ObjectId
+        type:ObjectId
     },
     comments: [{
         type: ObjectId,
