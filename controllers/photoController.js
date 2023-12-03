@@ -1,7 +1,13 @@
 const { photoModel } = require('../models');
 
 function getPhotos(req, res, next) {
-    photoModel.find()
+    const options = {}
+    if(req.query.search){
+        options.name = new RegExp(query.search, 'i');
+    }
+    photoModel.find(options)
+        .sort({_createdOn: -1})
+        .limit(4)
         .populate('userId')
         .then(photos => res.json(photos))
         .catch(next);
