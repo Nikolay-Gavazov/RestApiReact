@@ -31,10 +31,9 @@ function editPhoto(req, res, next) {
         .catch(next);
 }
 function createPhoto(req, res, next) {
-    const { title, imageUrl, resolution, format, license} = req.body;
+    const { title, imageUrl, resolution, format, license, _ownerId} = req.body;
     const _createdOn = Date.now();
-    const { _id: userId } = req.user;
-    photoModel.create({ title, imageUrl, resolution, format, license, _createdOn, _ownerId:userId }).then(photo => res.json(photo)).catch(next)
+    photoModel.create({ title, imageUrl, resolution, format, license, _createdOn, _ownerId }).then(photo => res.json(photo)).catch(next)
         
 }
 function deletePhoto(req, res, next) {
