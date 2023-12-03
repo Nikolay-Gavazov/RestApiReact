@@ -25,6 +25,9 @@ const photoSchema = new mongoose.Schema({
     _createdOn:{
         type: Date,
     },
+    _ownerId:{
+        ObjectId
+    },
     comments: [{
         type: ObjectId,
         ref: "Comment"
