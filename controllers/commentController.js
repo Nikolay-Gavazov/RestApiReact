@@ -25,7 +25,7 @@ function createComment(req, res, next) {
     const { _id: userId } = req.user;
     const { text } = req.body;
     const _createdOn = Date.now();
-    newPost(text, userId, photoId, _createdOn)
+    newPost(text, userId, photoId, _createdOn, _ownerId = _id)
         .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
         .catch(next);
 }
