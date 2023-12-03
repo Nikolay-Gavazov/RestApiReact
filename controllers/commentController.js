@@ -1,11 +1,11 @@
 const { userModel, photoModel, commentModel } = require('../models');
 
-function newComment(text, userId, photoId) {
-    return commentModel.create({ text, userId, photoId })
+function newComment(text, userId, photoId, _createdOn) {
+    return commentModel.create({ text, userId, photoId ,_createdOn })
         .then(comment => {
             return Promise.all([
-                userModel.updateOne({ _id: userId }, { $push: { comments: comment._id }, $addToSet: { themes: themeId } }),
-                themeModel.findByIdAndUpdate({ _id: photoId }, { $push: { comments: comment._id } }, { new: true })
+                userModel.updateOne({ _id: userId }, { $push: { comments: comment._id } }),
+                photoModel.findByIdAndUpdate({ _id: photoId }, { $push: { comments: comment._id } }, { new: true })
             ])
         })
 }
@@ -25,9 +25,9 @@ function createComment(req, res, next) {
     const { _id: userId } = req.user;
     const { text } = req.body;
     const _createdOn = Date.now();
-    commentModel.create({ text, userId, photoId ,_createdOn })
-    .then(comment => res.json(comment))
-    .catch(next)
+    newPost(text, userId, photoId, _createdOn)
+        .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
+        .catch(next);
 }
 
 function editComment(req, res, next) {
