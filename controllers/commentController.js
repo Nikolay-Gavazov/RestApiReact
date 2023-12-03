@@ -1,7 +1,7 @@
 const { userModel, photoModel, commentModel } = require('../models');
 
-function newComment(text, userId, photoId, _createdOn) {
-    return commentModel.create({ text, userId, photoId ,_createdOn })
+function newComment(text, userId, photoId,email, _createdOn) {
+    return commentModel.create({ text, userId, photoId,email, _createdOn})
         .then(comment => {
             return Promise.all([
                 userModel.updateOne({ _id: userId }, { $push: { comments: comment._id } }),
