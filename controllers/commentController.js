@@ -11,8 +11,8 @@ const { userModel, photoModel, commentModel } = require('../models');
 }
  */
 function getComments(req, res, next) {
-
-    commentModel.find()
+    const { id } = req.params;
+    commentModel.find({photoId: id})
         .populate('photoId userId')
         .then(comments => {
             res.status(200).json(comments)
