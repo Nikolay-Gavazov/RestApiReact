@@ -22,10 +22,9 @@ function getComments(req, res, next) {
 
 function createComment(req, res, next) {
     const { photoId } = req.params;
-    const { _id: userId } = req.user;
-    const { text } = req.body;
+    const { email, text, userId } = req.body;
     const _createdOn = Date.now();
-    newComment(text, userId, photoId, _createdOn)
+    newComment(text, userId, photoId,email, _createdOn)
         .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
         .catch(next);
 }
