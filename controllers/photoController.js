@@ -1,11 +1,14 @@
 const { photoModel } = require('../models');
 
 function getPhotos(req, res, next) {
-    const options = {}
-    if(req.query.search){
-        options.name = new RegExp(query.search, 'i');
-    }
-    photoModel.find(options)
+    photoModel.find()
+        .populate('userId')
+        .then(photos => res.json(photos))
+        .catch(next);
+}
+
+function getSortedPhotos(req, res, next) {
+    photoModel.find()
         .sort({_createdOn: -1})
         .limit(4)
         .populate('userId')
@@ -47,6 +50,7 @@ function deletePhoto(req, res, next) {
 module.exports = {
     getPhoto,
     getPhotos,
+    getSortedPhotos,
     createPhoto,
     editPhoto,
     deletePhoto
