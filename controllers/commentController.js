@@ -26,7 +26,7 @@ function createComment(req, res, next) {
   const { email, text, userId } = req.body;
   const _createdOn = Date.now();
   commentModel
-    .create(text, userId, (photoId = id), email, _createdOn)
+    .create({text, userId, photoId:id, email, _createdOn})
     .then((comment) => res.status(200).json(comment))
     .catch(next);
 }
