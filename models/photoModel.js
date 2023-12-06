@@ -4,7 +4,9 @@ const { ObjectId } = mongoose.Schema.Types;
 const photoSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 20
     },
     imageUrl:{
         type: String,
@@ -12,15 +14,18 @@ const photoSchema = new mongoose.Schema({
     },
     resolution:{
         type: String,
-        required: true
+        required: true,
+        minlength: 7
     },
     format:{
         type: String,
-        required: true
+        required: true,
+        minlength: 3
     },
     license:{
         type: String,
-        required: true
+        required: true,
+        minlength: 4
     },
     _createdOn:{
         type: Date,
